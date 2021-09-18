@@ -1,0 +1,15 @@
+uvicorn==0.13.4
+fastapi==0.63.0
+python-multipart==0.0.5
+psycopg2-binary==2.8.6
+configparser==5.0.2
+passlib==1.7.4
+python-jose==3.2.0
+pycryptodome==3.10.1
+alembic==1.6.5
+webdavclient3==3.14.5
+datetime==4.3
+
+
+onnxruntime-gpu==1.8.1
+albumentations==1.0.3
