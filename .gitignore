@@ -3,3 +3,5 @@ __pycache__
 datasets
 events.out.tfevents.*
 *.pth
+*.onnx
+notebook
