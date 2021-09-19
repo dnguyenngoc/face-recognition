@@ -24,4 +24,3 @@ def get_image(name, to_rgb=False):
         img = img[:,:,::-1]
     ImageCache.data[key] = img
     return img
-

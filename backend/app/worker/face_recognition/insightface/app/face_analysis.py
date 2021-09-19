@@ -27,8 +27,8 @@ class FaceAnalysis:
         self.model_dir = ensure_available('models', name, root=root)
         onnx_files = glob.glob(osp.join(self.model_dir, '*.onnx'))
         onnx_files = sorted(onnx_files)
-        print(onnx_files)
         for onnx_file in onnx_files:
+            print(onnx_file)
             if onnx_file.find('_selfgen_')>0:
                 #print('ignore:', onnx_file)
                 continue
@@ -111,4 +111,8 @@ class FaceAnalysis:
             #            cv2.circle(dimg, (lmk[l][0], lmk[l][1]), 1, color,
             #                       2)
         return dimg
+
+    def crop_image(self, image, bbox):
+        crop = image[bbox[1]:bbox[3], bbox[0]:bbox[2]]
+        return crop
 
