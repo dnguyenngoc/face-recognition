@@ -1,5 +1,8 @@
 # rasberrypi-ai
 
+## Model
+https://drive.google.com/drive/u/0/folders/1BeOpAg2Y5XFaOdrI4oz6I47ux3c8GQvf
+
 ## FOR DEV
 
 ### 1. Install docker and docker-compose:
