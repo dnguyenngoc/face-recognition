@@ -6,3 +6,4 @@ events.out.tfevents.*
 *.onnx
 *.sav
 notebook
+*.jpg

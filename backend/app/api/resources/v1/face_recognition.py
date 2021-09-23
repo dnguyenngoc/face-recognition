@@ -2,22 +2,47 @@
 @ Duy Nguyen
 """
 
-from fastapi import APIRouter
-from worker.ml import face_detection
-import cv2
+from fastapi import APIRouter, UploadFile, File
+from worker.ml import face_detection, face_recognition, classes_new
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
+from helpers import image as image_helper
+import cv2
+from worker.facenet_recognition.draw_func import draw_box
+import uuid
+
 
 router = APIRouter()
 
 
-@router.post("/detection")
-def face_detection_test():
-    image = cv2.imread('./worker/insightface/data/images/t1.jpg')
-    faces = face_detection.get(image)
-    for i in range(len(faces)):
-        face = faces[i].bbox.astype(np.int)
-        crop = face_detection.crop_image(image, face)
-        im = Image.fromarray(np.uint8(crop)).convert('RGB')
-        im = im.resize((224,224))
-        im.save('./api/resources/v1/{}.jpg'.format(i))
+@router.post("/recognition")
+def face_detection_test(
+    image: UploadFile = File(...),
+):
+    image = image.file.read()
+    image_det = image_helper.io_bytes_to_numpy(image)
+    im_reg = cv2.cvtColor(image_det, cv2.COLOR_BGR2RGB)
+    im_reg = Image.fromarray(im_reg)
+
+    faces = face_detection.get(image_det)
+    boxes, probs, kps =  [], [], []
+    
+    for face in faces:
+        boxes.append(face['bbox'])
+        probs.append(face['det_score'])
+        kps.append(face['kps'])
+    idx, prob = face_recognition.recogniton(im_reg, boxes)
+
+    idx = [classes_new[ix] for ix in idx]
+
+    draw = ImageDraw.Draw(im_reg)
+
+    boxes, probs = draw_box(draw, boxes, idx, probs, 0.87)
+
+    name_file = str(uuid.uuid4().hex) + '.jpg'
+
+    im_reg.save('./api/resources/v1/tmp/{}'.format(name_file))
+
+    return {
+        "url": "https://localhost:8081/api/v1/image/show/{}".format(name_file)
+    }

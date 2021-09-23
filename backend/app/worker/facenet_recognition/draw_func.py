@@ -35,7 +35,7 @@ def isOverlap(rect1, rect2):
     return False
 
 def draw_box(draw, boxes, names, probs, min_p=0.89):
-    font = ImageFont.truetype(os.path.join(ml_config.FONT_PATH , 'arial.ttf'), size=22)
+    font = ImageFont.truetype(os.path.join(ml_config.FONT_PATH , 'arial.ttf'), size=10)
 
     not_overlap_inds = []
     for i in range(len(boxes)): 
@@ -50,10 +50,20 @@ def draw_box(draw, boxes, names, probs, min_p=0.89):
     probs = [probs[i] for i in not_overlap_inds]
     for box, name, prob in zip(boxes, names, probs):
         if prob >= min_p: 
-            draw.rectangle(box.tolist(), outline=(255, 255, 255), width=5)
+            if name == 'pot': color = 'yellow'
+            else: color = 'white'
+            draw.rectangle(box.tolist(), outline=(255, 255, 255), width=2,)
+            x1, y1, _, _ = box
+            text_width, text_height = font.getsize(f'{name}')
+            draw.rectangle(((x1, y1 - text_height), (x1 + text_width, y1)), fill=color)
+            draw.text((x1, y1 - text_height), f'{name}', (24, 12, 30), font) 
+            # draw.text((x1, y1 - text_height), f'{name}: {prob:.2f}', (24, 12, 30), font) 
+        else:
+            name = 'chịu'
+            draw.rectangle(box.tolist(), outline=(255, 255, 255), width=2)
             x1, y1, _, _ = box
             text_width, text_height = font.getsize(f'{name}')
             draw.rectangle(((x1, y1 - text_height), (x1 + text_width, y1)), fill='white')
-            draw.text((x1, y1 - text_height), f'{name}: {prob:.2f}', (24, 12, 30), font) 
-            
+            draw.text((x1, y1 - text_height), f'{name}', (24, 12, 30), font) 
+            # draw.text((x1, y1 - text_height), f'{name}: {prob:.2f}', (24, 12, 30), font) 
     return boxes, probs 
