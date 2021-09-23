@@ -21,8 +21,8 @@ def face_detection_test(
 ):
     image = image.file.read()
     image_det = image_helper.io_bytes_to_numpy(image)
-    im_reg = cv2.cvtColor(image_det, cv2.COLOR_BGR2RGB)
-    im_reg = Image.fromarray(im_reg)
+    # im_reg = cv2.cvtColor(image_det, cv2.COLOR_BGR2RGB)
+    im_reg = Image.fromarray(image_det)
 
     faces = face_detection.get(image_det)
     boxes, probs, kps =  [], [], []
@@ -37,9 +37,9 @@ def face_detection_test(
 
     draw = ImageDraw.Draw(im_reg)
 
-    boxes, probs = draw_box(draw, boxes, idx, probs, 0.87)
+    boxes, probs = draw_box(draw, boxes, idx, probs, 0.3)
 
-    name_file = str(uuid.uuid4().hex) + '.jpg'
+    name_file = str(uuid.uuid4().hex) + '.png'
 
     im_reg.save('./api/resources/v1/tmp/{}'.format(name_file))
 
