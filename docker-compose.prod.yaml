@@ -1,0 +1,21 @@
+x-pi-volumes: &pi-volumes
+  - pi-logs:/app/logs
+
+x-networks: &pi-networks
+  - pi-net
+
+version: '3.8'
+
+services:
+  api:
+    container_name: pi-api-prod
+    image: duynguyenngoc/pi-ai:backend
+    restart: always
+    volumes: *pi-volumes
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8081 --reload"
+    networks: *pi-networks
+networks:
+  pi-net:
+
+volumes:
+  pi-logs:
