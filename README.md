@@ -7,16 +7,15 @@ https://drive.google.com/drive/u/0/folders/1BeOpAg2Y5XFaOdrI4oz6I47ux3c8GQvf
 
 ## How to run?
 
-## 1. copy docker-compose.prod.yaml
+### 1. copy docker-compose.prod.yaml
 
 https://github.com/apot-group/rasberrypi-ai/docker-compose.prod.yaml
 
-`python `
 
-## 2. dowload model fro model link   
+### 2. dowload model fro model link   
 `contact with admin to get model`
 
-## 3 Change path file to of docker-compose.prod.yaml to your model file
+### 3 Change path file to of docker-compose.prod.yaml to your model file
 ```
   - {path-to-env-file}:/app/env-staging.ini
   - {path-to-fact-detection-model-file}:/app/worker/insightface/save_model/models/face_detection/scrfd_10g_bnkps.onnx
@@ -30,7 +29,7 @@ https://github.com/apot-group/rasberrypi-ai/docker-compose.prod.yaml
   # - ./backend/app/worker/facenet_recognition/save_model/svm.sav:/app/worker/facenet_recognition/save_model/svm.sav
 ```
 
-## 4. start with docker-compose
+### 4. start with docker-compose
 ```
 docker-compose -f docker-compose.prod.yaml -up
 ```
