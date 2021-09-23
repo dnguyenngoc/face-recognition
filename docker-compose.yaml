@@ -1,5 +1,5 @@
 x-pi-volumes: &pi-volumes
-  - ./app/:/app/
+  - ./backend/app/:/app/
 
 x-networks: &pi-networks
   - pi-net
