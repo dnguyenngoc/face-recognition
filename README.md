@@ -7,13 +7,13 @@ https://drive.google.com/drive/u/0/folders/1BeOpAg2Y5XFaOdrI4oz6I47ux3c8GQvf
 
 ### 1. Install docker and docker-compose:
 
-`https://www.docker.com/`
+https://www.docker.com/
 
 ### 2. Clone this repo
 `git clone https://github.com/apot-group/rasberrypi-ai.git` 
 
-### 2. Copy config file to model to model path
-`contact with admin of project to get this file` 
+### 2. Download model from Model link
+`contact with admin to get permission` 
 
 ### 3. From project dir:
 
@@ -29,3 +29,9 @@ Api docs at: http://localhost:8081/api/docs#/ or http://localhost:8081/api/redoc
 </div>
 <br /> 
 <br />  -->
+
+<!--follow intagram or CONTACT to me if you have any question? -->
+
+Contact
+=======
+Email: duynguyenngoc@hotmail.com
