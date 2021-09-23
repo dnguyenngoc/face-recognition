@@ -1,5 +1,15 @@
 # rasberrypi-ai
 
+**Gallery**
+
+<kbd>
+  <a href="https://github.com/apot-group/rasberrypi-ai">
+    <img title="Gallery" src="https://github.com/apot-group/rasberrypi-ai/blob/main/images/show.png?raw=true">
+  </a>
+</kbd>
+<br/>
+
+
 ## Model
 https://drive.google.com/drive/u/0/folders/1BeOpAg2Y5XFaOdrI4oz6I47ux3c8GQvf
 

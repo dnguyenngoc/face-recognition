@@ -7,5 +7,5 @@ events.out.tfevents.*
 *.sav
 notebook
 *.jpg
-*.png
+# *.png
 *.ini
