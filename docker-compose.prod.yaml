@@ -1,5 +1,16 @@
 x-pi-volumes: &pi-volumes
   - pi-logs:/app/logs
+  - {path-to-env-file}:/app/env-staging.ini
+  - {path-to-fact-detection-model-file}:/app/worker/insightface/save_model/models/face_detection/scrfd_10g_bnkps.onnx
+  - {path-to-fact-recognition-label-file}:/app/worker/facenet_recognition/save_model/classes_label.json
+  - {path-to-fact-recognition-model-file}:/app/worker/facenet_recognition/save_model/svm.sav
+  
+  # EX FOR ME
+  # - ./backend/app/env-staging.ini:/app/env-staging.ini
+  # - ./backend/app/worker/insightface/save_model/models/face_detection/scrfd_10g_bnkps.onnx:/app/worker/insightface/save_model/models/face_detection/scrfd_10g_bnkps.onnx
+  # - ./backend/app/worker/facenet_recognition/save_model/classes_label.json:/app/worker/facenet_recognition/save_model/classes_label.json
+  # - ./backend/app/worker/facenet_recognition/save_model/svm.sav:/app/worker/facenet_recognition/save_model/svm.sav
+
 
 x-networks: &pi-networks
   - pi-net
@@ -10,10 +21,12 @@ services:
   api:
     container_name: pi-api-prod
     image: duynguyenngoc/pi-ai:backend
-    restart: always
+    restart: unless-stopped
     volumes: *pi-volumes
     command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8081 --reload"
     networks: *pi-networks
+    ports: 
+      - "8081:8081"
 networks:
   pi-net:
 
