@@ -1,0 +1,44 @@
+x-pi-volumes: &pi-volumes
+  - ./app/:/app/
+
+x-networks: &pi-networks
+  - pi-net
+
+x-pi-api-port: &pi-api-port
+  - "8081:8081"
+
+
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./backend/
+      dockerfile: ./Dockerfile
+    container_name: pi-api
+    restart: unless-stopped
+    volumes: *pi-volumes
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8081 --reload"
+    ports: *pi-api-port
+    networks: *pi-networks
+
+  # ml-reg-det:
+  #   container_name: pi-ml-recognition-detection
+  #   build:
+  #     context: ./
+  #     dockerfile: ./Dockerfile
+  #   restart: unless-stopped
+  #   volumes: *pi-volumes
+  #   command: "celery -A worker.celery.app worker --loglevel=info --concurrency=2 -E --logfile=logs/celery.log"
+  #   networks: *pi-networks
+  #   environment:
+  #     - REDIS_HOST=10.1.32.150
+  #     - REDIS_PORT=6379
+  #     - REDIS_DB=0
+  #     - REDIS_PASS=password
+  #     - RABBITMQ_HOST=10.1.32.150
+  #     - RABBITMQ_PORT=5672
+  #     - RABBITMQ_USER=guest
+  #     - RABBITMQ_PASS=guest
+networks:
+  pi-net:

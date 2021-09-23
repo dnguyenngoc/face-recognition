@@ -1,0 +1,39 @@
+name:  PRODUCTION_PIPELINE
+on:
+  push:
+    branches:
+    - production  
+env:
+  # Variable name
+  PROJECT_NAME: pi-ai
+  FRONTEND: frontend
+  BACKEND: backend
+
+  # dockerhub container
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
+jobs:
+
+  build-backend:
+    name: Building backend production
+    runs-on: ubuntu-latest
+    steps:  
+
+    # [Step-1] check config git
+    - uses: actions/checkout@v2
+
+    # [Step-2] login dockerhub container
+    - name: Login to DockerHub Registry
+      run: |
+        echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+    
+    # [Step-3] buid and tag image from Dockerfile
+    - name: Build and tag the image
+      run: |
+        docker build -t $BACKEND -t $DOCKERHUB_USERNAME/$PROJECT_NAME:$BACKEND ./backend/
+    
+    # [Step-4] Push image to docker hub
+    - name: Push image to DockerHub
+      run: |
+        docker push $DOCKERHUB_USERNAME/$PROJECT_NAME:$BACKEND
