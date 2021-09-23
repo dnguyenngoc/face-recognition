@@ -12,7 +12,8 @@ face_detection.prepare(ctx_id=0, det_size=(640, 640))
 
 face_recognition = FaceRecognition()
 
-classes = json.load(ml_config.FACE_REC_LABLE_PATH)
+f = open(ml_config.FACE_REC_LABLE_PATH, encoding="utf8")
+classes = json.loads(f.read())
 classes_new = {}
 for key, value in classes.items():
     classes_new[value] = key
