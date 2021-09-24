@@ -10,7 +10,8 @@ from helpers import image as image_helper
 import cv2
 from worker.facenet_recognition.draw_func import draw_box
 import uuid
-
+from glob import glob
+import os
 
 router = APIRouter()
 
@@ -37,12 +38,21 @@ def face_detection_test(
 
     draw = ImageDraw.Draw(im_reg)
 
-    boxes, probs = draw_box(draw, boxes, idx, probs, 0.3)
+    boxes, probs = draw_box(draw, boxes, idx, probs, 0.84)
 
-    name_file = str(uuid.uuid4().hex) + '.png'
+    name_file = str(uuid.uuid4().hex) + '.jpg'
 
     im_reg.save('./api/resources/v1/tmp/{}'.format(name_file))
 
     return {
-        "url": "https://localhost:8081/api/v1/image/show/{}".format(name_file)
+        "url": "http://localhost:8081/api/v1/images/show/{}".format(name_file)
     }
+
+
+@router.post("/remove-tmp")
+def remove(): 
+    paths = glob('./api/resources/v1/tmp/*.jpg')
+    for item in paths:
+        try: os.remove(item)
+        except: continue
+    return paths

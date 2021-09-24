@@ -21,7 +21,7 @@ https://drive.google.com/drive/u/0/folders/1BeOpAg2Y5XFaOdrI4oz6I47ux3c8GQvf
 
 https://github.com/apot-group/rasberrypi-ai/docker-compose.prod.yaml
 
-### 2. dowload model fro model link   
+### 2. dowload model from model link   
 `contact with admin to get model`
 
 ### 3 Change path file to of docker-compose.prod.yaml to your model file
