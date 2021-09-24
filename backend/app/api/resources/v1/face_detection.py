@@ -25,9 +25,9 @@ def face_detection_test(
     im_reg = Image.fromarray(image_det)
 
     faces = face_detection.get(image_det)
-    name_file = str(uuid.uuid4().hex) + '.jpg'
     list_file = []
     for face in faces:
+        name_file = str(uuid.uuid4().hex) + '.jpg'
         face = face.bbox.astype(np.int)
         crop_image = face_detection.crop_image(image_det, face)
         im = Image.fromarray(np.uint8(crop_image))
