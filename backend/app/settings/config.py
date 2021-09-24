@@ -50,3 +50,7 @@ SALT = bytes(AUTHENTICATE['salt'], "utf-8").decode('unicode_escape')
 ACCESS_TOKEN_EXPIRE_MINUTES = AUTHENTICATE.getint('access_expire')
 FRESH_TOKEN_EXPIRE_MINUTES = AUTHENTICATE.getint('fresh_expire')
 SECRET_KEY = AUTHENTICATE['secret_key'] 
+
+
+FACE_RECOGNITION_DIR = './api/resources/v1/tmp/'
+FACE_DETECTION_DIR = './api/resources/v1/det_tmp/'
