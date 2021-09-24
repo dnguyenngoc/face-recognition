@@ -37,7 +37,7 @@ def face_detection_test(
 
     draw = ImageDraw.Draw(im_reg)
 
-    boxes, probs = draw_box(draw, boxes, idx, probs, 0.3)
+    boxes, probs = draw_box(draw, boxes, idx, probs, 0.86)
 
     name_file = str(uuid.uuid4().hex) + '.png'
 
