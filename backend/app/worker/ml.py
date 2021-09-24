@@ -17,12 +17,3 @@ classes = json.loads(f.read())
 classes_new = {}
 for key, value in classes.items():
     classes_new[value] = key
-
-
-
-
-
-
-
-
-6
